@@ -1,0 +1,85 @@
+<table style=" margin-top:170px">
+	<tr>
+		<td style=" width:30%">
+	
+
+
+		<div>
+			<span>Search</span>
+			<input type="text" name="search" ng-model="search.term"/>
+			<input type="button" name="" value="cauta"  ng-click="searchParcAuto(search)"/>
+		</div>
+		
+		<table>
+			<tr ng-repeat="vehicul in vehiculList">
+					<td>{{vehicul.marca}}</td>
+					<td>{{vehicul.numar_inmatriculare}}</td>
+					<td>{{vehicul.culoare}}</td>
+					<td><a ui-sref="detaliiParcAuto({parcAutoId : vehicul.parcAutoId})">Vezi parc</a></td>
+			</tr>
+			
+		</table>
+		</td>
+	
+	    <td style=" width:30%">
+	    	
+	    	<h4>
+	    		Lista Parcuri Auto Disponibile:
+	    	</h4>
+	    	
+		<table border= "1" >
+			<thead>
+				<th>
+					Denumire
+				</th>
+				<th>
+					Adresa
+				</th>
+				<th>
+					Capacitate
+				</th>
+				<th>
+					Optiuni
+				</th>
+				
+			</thead>
+			<tr ng-repeat="parcAuto in parcAutoList" ng-include="getTemplate(parcAuto)">
+				<script type="text/ng-template" id="display">
+					<td>{{parcAuto.denumire}}</td>
+					<td>{{parcAuto.adresa}}</td>
+					<td>{{parcAuto.capacitate}}</td>
+					<td colspan="3">
+						<input type="button" value="delete" ng-click="deleteParcAuto(parcAuto)">
+						<input type="button" value="edit" ng-click="editParcAuto(parcAuto)">
+						<a ui-sref="detaliiParcAuto({parcAutoId : parcAuto.id})">Detalii</a>
+					</td>	
+				</script>
+				<script type="text/ng-template" id="edit">
+					<td><input type="text" ng-model="parcAuto.denumire"></td>
+					<td><input type="text" ng-model="parcAuto.adresa"></td>
+					<td><input type="text" ng-model="parcAuto.capacitate"></td>
+					<td colspan="3">
+						<input type="button" value="save" ng-click="saveParcAuto(parcAuto)">
+					</td>	
+				</script>
+			</tr>
+		</table>
+	    </td>
+		
+		<td style=" width:30%">
+			
+			 	<h4>
+	    		Completeaza formular Parc Auto:
+	    	    </h4>
+			
+		<form name="add_park_form">
+	        Denumire: <input type="text" ng-model="parcAuto.denumire"><br />
+	        Adresa: <input type="text" ng-model="parcAuto.adresa"><br />
+	        Capacitate: <input name="capacitate_input" type="text" ng-model="parcAuto.capacitate"  directiva-parc-auto>
+	        <span ng-show="add_park_form.capacitate_input.$touched && add_park_form.capacitate_input.$invalid">Introduceti doar caractere numerice</span><br />
+	        <input type="button" value="add" ng-click="addParcAuto(parcAuto)">
+		</form>
+		</td>
+
+</tr>
+</table>

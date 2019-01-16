@@ -1,0 +1,64 @@
+<table style=" margin-top:170px">
+<tr>
+	        <td style=" width:30%">
+			<div>Denumire parc auto: {{parcAuto.denumire}}</div>
+			<div>Adresa: {{parcAuto.adresa}}</div>
+			<div>Capacitate: {{parcAuto.capacitate}}</div>
+			</td>
+		
+		    <td style=" width:30%">
+		    
+		    	<h4>
+		    		Vehicule inregistrate:
+		    	</h4>
+		    	
+			<table border= "1">
+				<tr ng-repeat="vehicul in parcAuto.vehiculeList" ng-include="getTemplate(vehicul)">
+					<script type="text/ng-template" id="display">
+						<td>{{vehicul.marca}}</td>
+						<td>{{vehicul.numar_inmatriculare}}</td>
+						<td>{{vehicul.culoare}}</td>
+						<td colspan="3">
+							<input type="button" value="delete" ng-click="deleteVehicul(vehicul)">
+							<input type="button" value="edit" ng-click="editVehicul(vehicul)">
+						</td>	
+					</script>
+					<script type="text/ng-template" id="edit">
+						<td><input type="text" ng-model="vehicul.marca"></td>
+						<td><input type="text" ng-model="vehicul.numar_inmatriculare"></td>
+						<td><input type="text" ng-model="vehicul.culoare"></td>
+						<td colspan="3">
+							<input type="button" value="save" ng-click="saveVehicul(vehicul)">
+						</td>	
+					</script>
+				</tr>
+			</table>
+			</td>
+			
+			<td style=" width:30%">
+				
+			    <h4>
+		    		Formulare inregistrare vehicul:
+		    	</h4>
+				
+			<div>Adauga vehicul</div>
+				<form name="add_vehicle_form">
+		        	Marca: <input name="marca_input" type="text" ng-model="vehicul.marca" required>
+		        	<span ng-show="add_vehicle_form.marca_input.$touched && add_vehicle_form.marca_input.$invalid">Introduceti marca</span><br />
+		        	Numar inmatriculare: <input name="numar_inmatriculare_input" type="text" ng-model="vehicul.numar_inmatriculare" required>
+		        	<span ng-show="add_vehicle_form.numar_inmatriculare_input.$touched &&add_vehicle_form.numar_inmatriculare_input.$invalid">Introduceti nr inmatriculare</span><br />
+		        	Culoare: <input name="culoare_input" type="text" ng-model="vehicul.culoare" required>
+		        	<span ng-show="add_vehicle_form.culoare_input.$touched && add_vehicle_form.culoare_input.$invalid">Introduceti culoarea</span><br />
+		        	<input ng-disabled="!add_vehicle_form.$valid" type="button" value="Adauga vehicul" ng-click="addVehicul(vehicul)">
+		      	</form>
+			</div>
+            </td>
+            
+            <div  style=" positive: relative; left: 90%; top: 90%">
+             
+             <a style="text-align: center" ui-sref="parcAutoList">Inapoi</a>
+             
+            </div>
+            
+</tr>
+</table>

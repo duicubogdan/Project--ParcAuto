@@ -1,0 +1,13 @@
+{ "name": "proiect_web-server",
+  "version": "0.10.25",
+  "description": "Proiect tehnologii web",
+  "author": "Duicu Bogdan",
+    "dependencies":{
+        "express":"*",
+        "sequelize":"*",
+        "body-parser":"*",
+        "cors":"*",
+        "mysql":"*"
+    },
+     "license": "CC"
+}
